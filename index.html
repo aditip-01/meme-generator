@@ -4,22 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Meme Generator</title>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Better loading of JS -->
+  <script src="script.js" defer></script>
 </head>
+
 <body>
   <div class="container">
-    <h1>Meme Generator</h1>
+    <h1>😂 Meme Generator</h1>
     <p>Click the button to load a random meme!</p>
 
     <div class="meme-container">
-      <img id="meme-img" src="" alt="Random Meme" />
+      <!-- Default placeholder image -->
+      <img 
+        id="meme-img" 
+        src="https://via.placeholder.com/400x300?text=Loading+Meme..." 
+        alt="Random Meme"
+      />
     </div>
 
     <div class="controls">
       <button id="btn-generate">Generate Meme</button>
     </div>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
