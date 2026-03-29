@@ -1,35 +1,37 @@
 const memeImg = document.getElementById("meme-img");
 const btn = document.getElementById("btn-generate");
 
-// Function to fetch a random meme
+// Function to fetch meme
 async function fetchMeme() {
   try {
+    // Button loading state
     btn.disabled = true;
     btn.textContent = "Loading...";
 
-    // Using a popular meme API
-    const res = await fetch("https://meme-api.com/gimme");
+    // Fetch memes from API
+    const res = await fetch("https://api.imgflip.com/get_memes");
     const data = await res.json();
 
-    // Set the meme image
-    memeImg.src = data.url;
-    memeImg.alt = data.title || "Random Meme";
+    // Get random meme
+    const memes = data.data.memes;
+    const randomMeme = memes[Math.floor(Math.random() * memes.length)];
 
-    // Optional: log metadata (comment out in production)
-    // console.log("Meme title:", data.title);
-    // console.log("Subreddit:", data.subreddit);
+    // Set meme image
+    memeImg.src = randomMeme.url;
+    memeImg.alt = randomMeme.name;
 
-  } catch (err) {
-    console.error("Failed to fetch meme:", err);
-    alert("Failed to load meme. Please try again.");
+  } catch (error) {
+    console.error("Error fetching meme:", error);
+    alert("Failed to load meme 😢");
   } finally {
+    // Reset button
     btn.disabled = false;
     btn.textContent = "Generate Meme";
   }
 }
 
-// Fetch meme on page load
-fetchMeme();
+// Load meme on page load
+window.onload = fetchMeme;
 
-// Hook up button
+// Button click event
 btn.addEventListener("click", fetchMeme);
